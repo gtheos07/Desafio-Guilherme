@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 
 gem 'devise'
+gem 'slack-notifier'
 
 
 gem 'rails'#,        '5.1.4'
