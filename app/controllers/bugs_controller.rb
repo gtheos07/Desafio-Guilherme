@@ -28,7 +28,7 @@ class BugsController < ApplicationController
     
     require 'slack-notifier'
     notifier = Slack::Notifier.new "https://hooks.slack.com/services/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"
-    notifier.ping "Bug Added"
+    notifier.ping "Bug Added #{bug_params}"
 
     respond_to do |format|
       if @bug.save
@@ -46,7 +46,7 @@ class BugsController < ApplicationController
   def update
     require 'slack-notifier'
     notifier = Slack::Notifier.new "https://hooks.slack.com/services/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"
-    notifier.ping "Bug Updated"
+    notifier.ping "Bug Updated #{bug_params}"
     respond_to do |format|
       if @bug.update(bug_params)
         format.html { redirect_to @bug, notice: 'Bug was successfully updated.' }
@@ -61,10 +61,10 @@ class BugsController < ApplicationController
   # DELETE /bugs/1
   # DELETE /bugs/1.json
   def destroy
-    @bug.destroy
     require 'slack-notifier'
     notifier = Slack::Notifier.new "https://hooks.slack.com/services/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"
     notifier.ping "Bug Removed"
+    @bug.destroy
     respond_to do |format|
       format.html { redirect_to bugs_url, notice: 'Bug was successfully destroyed.' }
       format.json { head :no_content }
