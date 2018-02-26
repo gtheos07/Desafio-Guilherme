@@ -1,0 +1,32 @@
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project.description %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @project.author %>
+</p>
+
+<h3>Bugs</h3>
+<% @bugs.each do |bug| %>
+  <div>
+    <strong><%= bug.author %></strong>
+    <br>
+    <p><%= bug.status %></p>
+    <p><%= bug.description %></p>
+    <p><%= link_to 'Delete', bug_path(bug), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  </div>
+<% end %>
+<%= render partial: 'bugs/form', locals: { bug: @bug } %>
+
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>
+
